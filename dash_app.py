@@ -33,9 +33,28 @@ html, body, [class*="css"] {
     color: #e2e8f0;
 }
 
+/* Ajustes de contraste para la barra lateral */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0f1117 0%, #161b22 100%) !important;
     border-right: 1px solid rgba(31,111,235,0.2);
+}
+
+[data-testid="stSidebar"] p, 
+[data-testid="stSidebar"] span, 
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] .st-emotion-cache-p4ox62 {
+    color: #e6edf3 !important;
+}
+
+[data-testid="stSidebar"] text, 
+[data-testid="stSidebar"] .stMarkdown p {
+    color: #e6edf3 !important;
+}
+
+/* Títulos de Expander en barra lateral */
+[data-testid="stSidebar"] details summary span p {
+    color: #58a6ff !important;
+    font-weight: 600;
 }
 
 /* Hero header médico */
@@ -239,6 +258,10 @@ df = load_data()
 # ──────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### 🏥 Panel de Control Clínico")
+    
+    # Botón de redirección al repositorio de GitHub
+    st.link_button("📁 Repositorio", "https://github.com/juliocastrolimas16-boop/dashboard.scopus", use_container_width=True)
+    
     st.markdown("---")
     
     all_years = sorted(df["Year"].unique())
