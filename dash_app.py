@@ -33,25 +33,28 @@ html, body, [class*="css"] {
     color: #e2e8f0;
 }
 
-/* Ajustes de contraste para la barra lateral */
+/* Ajustes globales y agresivos de contraste para TODO el texto de la barra lateral */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0f1117 0%, #161b22 100%) !important;
     border-right: 1px solid rgba(31,111,235,0.2);
 }
 
+/* Forzar color blanco/claro en textos, etiquetas, sliders, inputs y números de la barra lateral */
+[data-testid="stSidebar"] *, 
 [data-testid="stSidebar"] p, 
 [data-testid="stSidebar"] span, 
-[data-testid="stSidebar"] label,
-[data-testid="stSidebar"] .st-emotion-cache-p4ox62 {
+[data-testid="stSidebar"] label, 
+[data-testid="stSidebar"] div {
     color: #e6edf3 !important;
 }
 
-[data-testid="stSidebar"] text, 
-[data-testid="stSidebar"] .stMarkdown p {
-    color: #e6edf3 !important;
+/* Asegurar que los subtítulos o textos secundarios de los componentes conserven buena lectura */
+[data-testid="stSidebar"] .stMarkdown p,
+[data-testid="stSidebar"] caption {
+    color: #8b949e !important;
 }
 
-/* Títulos de Expander en barra lateral */
+/* Títulos de los Expander en la barra lateral */
 [data-testid="stSidebar"] details summary span p {
     color: #58a6ff !important;
     font-weight: 600;
@@ -258,10 +261,6 @@ df = load_data()
 # ──────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### 🏥 Panel de Control Clínico")
-    
-    # Botón de redirección al repositorio de GitHub
-    st.link_button("📁 Repositorio", "https://github.com/juliocastrolimas16-boop/dashboard.scopus", use_container_width=True)
-    
     st.markdown("---")
     
     all_years = sorted(df["Year"].unique())
@@ -298,7 +297,7 @@ with st.sidebar:
         - Consultas tardías al especialista
         """)
     
-    with st.expander("ℹ️ Sobre el Dashboard"):
+    with st.expander("ℹ️ Sobre el Dashboard", expanded=False):
         st.markdown("""
         **Pregunta de investigación:**
         > ¿Cuál es la eficacia de los modelos predictivos de IA para la detección temprana del cáncer de piel en hombres?
@@ -311,6 +310,9 @@ with st.sidebar:
         
         **Fuente:** Scopus (2015-2025)
         """)
+        st.markdown("---")
+        # Botón del repositorio reubicado aquí adentro
+        st.link_button("📁 Repositorio", "https://github.com/juliocastrolimas16-boop/dashboard.scopus", use_container_width=True)
     
     st.markdown("---")
     st.caption("🔬 Datos: Scopus · UPCH · Grupo 4 · Prevención Oncológica")
