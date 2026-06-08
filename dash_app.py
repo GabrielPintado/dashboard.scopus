@@ -318,7 +318,7 @@ with st.sidebar:
         """)
         st.markdown("---")
         # Botón del repositorio reubicado aquí adentro
-        st.link_button("📁 Repositorio", "https://github.com/juliocastrolimas16-boop/dashboard.scopus", use_container_width=True)
+        st.link_button("📁 :blue[Repositorio]", "https://github.com/juliocastrolimas16-boop/dashboard.scopus", use_container_width=True)
     
     st.markdown("---")
     st.caption("🔬 Datos: Scopus · UPCH · Grupo 4 · Prevención Oncológica")
