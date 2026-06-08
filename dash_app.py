@@ -6,8 +6,6 @@ from plotly.subplots import make_subplots
 from collections import Counter
 import re
 import numpy as np
-from io import StringIO
-import hashlib
 
 # ──────────────────────────────────────────────
 # PAGE CONFIG
@@ -213,15 +211,13 @@ html, body, [class*="css"] {
 """, unsafe_allow_html=True)
 
 # ──────────────────────────────────────────────
-# PLOTLY DARK THEME AVANZADO
+# PLOTLY DARK THEME - CORREGIDO (sin xaxis/yaxis)
 # ──────────────────────────────────────────────
 PLOT_LAYOUT = dict(
     paper_bgcolor="rgba(22,27,34,0)",
     plot_bgcolor="rgba(13,17,23,0.6)",
     font=dict(family="Inter", color="#8b949e", size=12),
     margin=dict(l=40, r=20, t=50, b=40),
-    xaxis=dict(gridcolor="#21262d", zerolinecolor="#30363d", showgrid=True, gridwidth=0.5),
-    yaxis=dict(gridcolor="#21262d", zerolinecolor="#30363d", showgrid=True, gridwidth=0.5),
     hoverlabel=dict(bgcolor="#161b22", font_size=12, font_family="Inter"),
     legend=dict(bgcolor="rgba(22,27,34,0.8)", bordercolor="#30363d", borderwidth=1),
 )
@@ -425,8 +421,10 @@ with c1:
         hovermode="x unified",
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
-    fig.update_yaxes(title_text="📄 N° Artículos", secondary_y=False, gridcolor="#21262d")
-    fig.update_yaxes(title_text="📊 Citas Totales", secondary_y=True, gridcolor="#21262d")
+    # Aplicar configuraciones de ejes con update_xaxes/update_yaxes
+    fig.update_xaxes(gridcolor="#21262d", showgrid=True, gridwidth=0.5)
+    fig.update_yaxes(title_text="📄 N° Artículos", secondary_y=False, gridcolor="#21262d", showgrid=True)
+    fig.update_yaxes(title_text="📊 Citas Totales", secondary_y=True, gridcolor="#21262d", showgrid=True)
     st.plotly_chart(fig, use_container_width=True)
 
 with c2:
@@ -479,9 +477,9 @@ with c3:
         height=max(400, top_n * 38),
         title=dict(text=f"🏆 Top {top_n} Artículos Más Citados", font=dict(color="#e6edf3", size=14)),
         coloraxis_showscale=False,
-        yaxis=dict(gridcolor="#21262d", color="#e6edf3", automargin=True),
-        xaxis=dict(gridcolor="#21262d", color="#8b949e", title="Número de citas"),
     )
+    fig3.update_xaxes(gridcolor="#21262d", title="Número de citas", showgrid=True)
+    fig3.update_yaxes(gridcolor="#21262d", color="#e6edf3", automargin=True, showgrid=False)
     st.plotly_chart(fig3, use_container_width=True)
 
 with c4:
@@ -533,9 +531,9 @@ with c5:
         height=450,
         title=dict(text="🏅 Top 12 Autores por Impacto", font=dict(color="#e6edf3", size=14)),
         coloraxis_showscale=False,
-        yaxis=dict(color="#e6edf3", automargin=True),
-        xaxis=dict(gridcolor="#21262d", color="#8b949e"),
     )
+    fig4.update_xaxes(gridcolor="#21262d", title="Citas acumuladas", showgrid=True)
+    fig4.update_yaxes(gridcolor="#21262d", color="#e6edf3", automargin=True, showgrid=False)
     st.plotly_chart(fig4, use_container_width=True)
 
 with c6:
@@ -562,6 +560,8 @@ with c6:
         title=dict(text="📚 Revistas: Productividad vs Impacto", font=dict(color="#e6edf3", size=14)),
         coloraxis_showscale=False,
     )
+    fig5.update_xaxes(gridcolor="#21262d", showgrid=True)
+    fig5.update_yaxes(gridcolor="#21262d", showgrid=True)
     st.plotly_chart(fig5, use_container_width=True)
 
 # ──────────────────────────────────────────────
@@ -601,8 +601,9 @@ fig6.update_layout(
     **PLOT_LAYOUT,
     title=dict(text="🤖 Frecuencia de Tecnologías IA en la Literatura", font=dict(color="#e6edf3", size=14)),
     coloraxis_showscale=False,
-    xaxis=dict(tickangle=-15, tickfont=dict(size=11)),
 )
+fig6.update_xaxes(tickangle=-15, tickfont=dict(size=11), gridcolor="#21262d")
+fig6.update_yaxes(gridcolor="#21262d", showgrid=True)
 fig6.update_traces(textposition="outside", textfont=dict(color="#58a6ff", size=11))
 st.plotly_chart(fig6, use_container_width=True)
 
@@ -676,10 +677,10 @@ if perf_data:
         **PLOT_LAYOUT,
         height=450,
         title=dict(text="📈 Distribución de Métricas de Rendimiento", font=dict(color="#e6edf3", size=14)),
-        yaxis=dict(range=[40, 105], title="Valor (%)", gridcolor="#21262d"),
-        xaxis=dict(title="Métrica", gridcolor="#21262d"),
         showlegend=False,
     )
+    fig7.update_xaxes(title="Métrica", gridcolor="#21262d")
+    fig7.update_yaxes(title="Valor (%)", range=[40, 105], gridcolor="#21262d", showgrid=True)
     st.plotly_chart(fig7, use_container_width=True)
     
     # Tabla resumen mejorada
