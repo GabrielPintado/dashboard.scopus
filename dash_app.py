@@ -39,13 +39,19 @@ html, body, [class*="css"] {
     border-right: 1px solid rgba(31,111,235,0.2);
 }
 
-/* Forzar color blanco/claro en textos, etiquetas, sliders, inputs y números de la barra lateral */
-[data-testid="stSidebar"] *, 
+/* Forzar color blanco/claro en textos estáticos, etiquetas y marcas de la barra lateral */
 [data-testid="stSidebar"] p, 
 [data-testid="stSidebar"] span, 
 [data-testid="stSidebar"] label, 
-[data-testid="stSidebar"] div {
+[data-testid="stSidebar"] .stMarkdown {
     color: #e6edf3 !important;
+}
+
+/* NUEVA REGLA: Forzar color celeste en el texto de BOTONES y SELECTORES dentro de la barra lateral */
+[data-testid="stSidebar"] button p,
+[data-testid="stSidebar"] div[data-baseweb="select"] * {
+    color: #58a6ff !important;
+    font-weight: 600 !important;
 }
 
 /* Asegurar que los subtítulos o textos secundarios de los componentes conserven buena lectura */
@@ -281,7 +287,7 @@ with st.sidebar:
     st.markdown("---")
     
     # Información médica en sidebar
-    with st.expander("🏥 Información Clínica", expanded=True):
+    with st.expander("🏥 Información Clinical", expanded=True):
         st.markdown("""
         ### 🩺 El Cáncer de Piel
         
@@ -806,4 +812,4 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Mensaje de éxito
-st.success("🏥 Dashboard actualizado - Análisis en tiempo real para la prevención del cáncer de piel", icon="🎉")
+st.success("🏥 Estilos de componentes ajustados - Contraste optimizado correctamente", icon="🎉")
