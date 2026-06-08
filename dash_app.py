@@ -49,6 +49,7 @@ html, body, [class*="css"] {
 
 /* NUEVA REGLA: Forzar color celeste en el texto de BOTONES y SELECTORES dentro de la barra lateral */
 [data-testid="stSidebar"] button p,
+[data-testid="stSidebar"] a p,
 [data-testid="stSidebar"] div[data-baseweb="select"] * {
     color: #58a6ff !important;
     font-weight: 600 !important;
